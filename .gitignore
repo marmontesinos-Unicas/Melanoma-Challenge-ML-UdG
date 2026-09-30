@@ -1,0 +1,29 @@
+# --- Dataset (too large for GitHub; keep it local) ---
+Binary/
+Multiclass/
+data/
+*.jpg
+*.jpeg
+*.png
+!docs/**/*.png
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- Models / outputs ---
+*.pkl
+*.joblib
+*.npy
+*.npz
+outputs/
+
+# --- IDE ---
+.idea/
+.vscode/

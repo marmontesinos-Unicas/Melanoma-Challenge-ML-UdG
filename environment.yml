@@ -1,0 +1,33 @@
+# Conda environment for the Melanoma CAD challenge (classical approach)
+#   conda env create -f environment.yml
+#   conda activate melanoma-cad
+#   python -m ipykernel install --user --name melanoma-cad
+name: melanoma-cad
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  # core
+  - numpy
+  - pandas
+  - scipy
+  # visualisation
+  - matplotlib
+  - seaborn
+  # image processing
+  - pillow
+  - opencv
+  - scikit-image
+  # machine learning
+  - scikit-learn
+  - imbalanced-learn
+  - xgboost
+  - lightgbm
+  # utilities
+  - tqdm
+  - joblib
+  # notebooks
+  - jupyterlab
+  - ipykernel
+  - ipywidgets
