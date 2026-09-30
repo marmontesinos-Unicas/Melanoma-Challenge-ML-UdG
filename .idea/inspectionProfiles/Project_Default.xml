@@ -1,0 +1,50 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="ignoredPackages">
+        <list>
+          <option value="appdirs" />
+          <option value="atomicwrites" />
+          <option value="colorlog" />
+          <option value="eli5" />
+          <option value="fqdn" />
+          <option value="graphviz" />
+          <option value="isoduration" />
+          <option value="jsonpointer" />
+          <option value="lxml" />
+          <option value="mkl-service" />
+          <option value="nibabel" />
+          <option value="opencv-python" />
+          <option value="optuna" />
+          <option value="path" />
+          <option value="pathlib" />
+          <option value="pyasn1-modules" />
+          <option value="pyls-spyder" />
+          <option value="PyQt5" />
+          <option value="PyQtWebEngine" />
+          <option value="PySide6" />
+          <option value="pywin32" />
+          <option value="setuptools" />
+          <option value="shap" />
+          <option value="shiboken6" />
+          <option value="slicer" />
+          <option value="typer" />
+          <option value="typer-slim" />
+          <option value="uri-template" />
+          <option value="webcolors" />
+          <option value="wheel" />
+          <option value="xgboost" />
+          <option value="yellowbrick" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyStubPackagesAdvertiser" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="scipy" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
