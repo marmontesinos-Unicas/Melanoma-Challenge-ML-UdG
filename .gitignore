@@ -1,6 +1,7 @@
 # --- Dataset (too large for GitHub; keep it local) ---
-Binary/
-Multiclass/
+# ignore the image split folders, but keep notebooks/scripts inside Binary/ and Multiclass/
+Binary/*/
+Multiclass/*/
 data/
 *.jpg
 *.jpeg
