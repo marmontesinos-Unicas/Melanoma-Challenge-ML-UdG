@@ -141,7 +141,8 @@ def fov_mask(img: np.ndarray, edge: float = 0.5, frame: float = 0.03,
 
 
 def remove_dark_borders(img: np.ndarray, mode: str = "crop_fill", margin: float = 0.02,
-                        edge: float = 0.5, return_mask: bool = False):
+                        edge: float = 0.5, return_mask: bool = False,
+                        dark_thr: int = 35, min_area_frac: float = 0.08):
     """
     Handle the black frame / circular field of view without losing the lesion.
 
@@ -153,6 +154,10 @@ def remove_dark_borders(img: np.ndarray, mode: str = "crop_fill", margin: float 
       'crop_inscribed' crop to the largest centred rectangle inside the FOV:
                        no filled pixels, but for small circles part of the
                        lesion can be cut.
+      'largest_rect'   Teresa's method (crop_black_borders_rect): only dark areas
+                       touching the image edge are frame (very dark lesions are
+                       kept), crop to the largest rectangle without frame.
+                       Uses dark_thr and min_area_frac (margin / edge are ignored).
       'none'           do nothing.
     margin: the FOV is shrunk by margin * shorter side to drop the dim,
             blurry rim of the circle.
@@ -160,6 +165,9 @@ def remove_dark_borders(img: np.ndarray, mode: str = "crop_fill", margin: float 
     Filling (instead of leaving black) avoids false hair at the circle edge
     (black-hat), a wrong illumination estimate and a biased Shades of Gray.
     """
+    if mode == "largest_rect":
+        out = crop_black_borders_rect(img, dark_thr, min_area_frac)
+        return (out, np.full(out.shape[:2], 255, np.uint8)) if return_mask else out
     mask = fov_mask(img, edge)
     if mode == "none" or mask.min() > 0:
         return (img, mask) if return_mask else img
@@ -200,6 +208,74 @@ def remove_dark_borders(img: np.ndarray, mode: str = "crop_fill", margin: float 
     elif mode != "fill":
         raise ValueError(f"unknown mode {mode!r}")
     return (out, mask) if return_mask else out
+
+
+
+# ---------------------------------------------------------------------------
+# 2c. Rectangular crop of the black frame (Teresa's method, preprocess_dataset_TERESA)
+# ---------------------------------------------------------------------------
+def border_valid_mask(img: np.ndarray, dark_thr: int = 35) -> np.ndarray:
+    """
+    True = valid pixel (not black frame). Only dark regions (gray < dark_thr)
+    CONNECTED TO THE IMAGE EDGE count as frame, so a very dark lesion in the
+    middle of the image is never removed. The frame is dilated by 1% of the
+    image side to drop its blurry rim.
+    """
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    dark = (gray < dark_thr).astype(np.uint8)
+    dark = cv2.morphologyEx(dark, cv2.MORPH_OPEN, np.ones((5, 5), np.uint8))
+    _, lab = cv2.connectedComponents(dark, connectivity=4)
+    border_ids = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))) - {0}
+    border = np.isin(lab, list(border_ids)).astype(np.uint8)
+    m = max(3, int(0.01 * min(img.shape[:2])))
+    border = cv2.dilate(border, np.ones((m, m), np.uint8))
+    return border == 0
+
+
+def largest_rectangle(mask: np.ndarray):
+    """Largest axis-aligned rectangle of True pixels (histogram + stack). Returns y0, y1, x0, x1."""
+    H, W = mask.shape
+    heights = [0] * W
+    best = (0, 0, H, 0, W)
+    for y in range(H):
+        row = mask[y]
+        heights = [h + 1 if row[x] else 0 for x, h in enumerate(heights)]
+        stack = []
+        for x in range(W + 1):
+            h = heights[x] if x < W else 0
+            start = x
+            while stack and stack[-1][1] >= h:
+                s, sh = stack.pop()
+                area = sh * (x - s)
+                if area > best[0]:
+                    best = (area, y - sh + 1, y + 1, s, x)
+                start = s
+            stack.append((start, h))
+    return best[1:]
+
+
+def crop_black_borders_rect(img: np.ndarray, dark_thr: int = 35, min_area_frac: float = 0.08,
+                            return_info: bool = False):
+    """
+    Crop to the largest rectangle without black frame (computed on a <=256-px
+    copy of the mask for speed). If that rectangle is smaller than
+    `min_area_frac` of the image, nothing is cropped (fallback).
+    """
+    H, W = img.shape[:2]
+    valid = border_valid_mask(img, dark_thr)
+    scale = min(1.0, 256 / max(H, W))
+    small = cv2.resize(valid.astype(np.uint8), None, fx=scale, fy=scale,
+                       interpolation=cv2.INTER_NEAREST).astype(bool)
+    y0, y1, x0, x1 = largest_rectangle(small)
+    y0, y1 = int(np.ceil(y0 / scale)), int(np.floor(y1 / scale))
+    x0, x1 = int(np.ceil(x0 / scale)), int(np.floor(x1 / scale))
+    fallback = (y1 - y0) * (x1 - x0) < min_area_frac * H * W
+    if fallback:
+        y0, y1, x0, x1 = 0, H, 0, W
+    out = img[y0:y1, x0:x1]
+    if return_info:
+        return out, {"valid": valid, "box": (y0, y1, x0, x1), "fallback": fallback}
+    return out
 
 
 # ---------------------------------------------------------------------------
