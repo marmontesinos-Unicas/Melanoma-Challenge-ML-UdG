@@ -1,9 +1,11 @@
 {
   "CHOSEN": {
     "borders": {
-      "mode": "crop_fill",
+      "mode": "largest_rect",
+      "dark_thr": 12,
+      "min_area_frac": 0.04,
       "margin": 0.02,
-      "edge": 0.5
+      "edge": 0.4
     },
     "color_constancy": {
       "power": 6,
@@ -12,7 +14,7 @@
     },
     "hair": {
       "kernel_size": 5,
-      "thresh": 9,
+      "thresh": 15,
       "kernel_shape": "cross",
       "inpaint_radius": 5
     }
@@ -21,9 +23,11 @@
     "short_side": 256,
     "crop_borders": true,
     "crop_kwargs": {
-      "mode": "crop_fill",
+      "mode": "largest_rect",
+      "dark_thr": 12,
+      "min_area_frac": 0.04,
       "margin": 0.02,
-      "edge": 0.5
+      "edge": 0.4
     },
     "color_constancy": true,
     "normalize_brightness": true,
@@ -34,7 +38,7 @@
     "hair": true,
     "hair_kwargs": {
       "kernel_size": 5,
-      "thresh": 9,
+      "thresh": 15,
       "kernel_shape": "cross",
       "inpaint_radius": 5
     },
