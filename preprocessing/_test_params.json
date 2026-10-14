@@ -1,0 +1,55 @@
+{
+  "borders": {
+    "seed": 42,
+    "use_in_chain": true,
+    "mode": "crop_fill",
+    "margin": 0.02,
+    "edge": 0.5
+  },
+  "color_constancy": {
+    "seed": 42,
+    "use_in_chain": true,
+    "power": 6,
+    "normalize_brightness": true,
+    "target": 180.0
+  },
+  "hair": {
+    "seed": 42,
+    "use_in_chain": true,
+    "kernel_size": 17,
+    "thresh": 10,
+    "kernel_shape": "cross",
+    "inpaint_radius": 5
+  },
+  "specular": {
+    "seed": 42,
+    "use_in_chain": false,
+    "v_thresh": 230,
+    "s_max": 40,
+    "dilate_iter": 1,
+    "max_area_frac": 0.02,
+    "inpaint_radius": 3
+  },
+  "illumination": {
+    "seed": 42,
+    "use_in_chain": false,
+    "method": "polynomial",
+    "degree": 2,
+    "keep_percentile": 40.0,
+    "blur_sigma": 0.25,
+    "strength": 1.0
+  },
+  "denoise": {
+    "seed": 42,
+    "use_in_chain": false,
+    "method": "bilateral",
+    "noise_kind": "none",
+    "noise_level": 10.0,
+    "ksize": 5,
+    "sigma_color": 75.0,
+    "nlm_h": 5.0,
+    "ad_iter": 10,
+    "ad_kappa": 30.0,
+    "zoom": false
+  }
+}
