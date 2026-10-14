@@ -1,0 +1,22 @@
+{
+  "hair": {
+    "kernel_size": 5,
+    "thresh": 10,
+    "kernel_shape": "cross",
+    "channel": "gray",
+    "blur_ksize": 3,
+    "filter_shape": true,
+    "min_elongation": 3.0,
+    "min_area": 20,
+    "max_fill": 0.35,
+    "dilate_iter": 1,
+    "inpaint_radius": 5,
+    "inpaint_method": "telea"
+  },
+  "hair_ref_side": 256,
+  "hair_method": "companera_preprocessing_py_v1",
+  "target_size": 512,
+  "dark_thr": 35,
+  "sog_p": 6,
+  "seg_channel": "S"
+}
