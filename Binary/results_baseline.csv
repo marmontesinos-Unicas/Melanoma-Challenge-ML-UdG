@@ -1,3 +1,0 @@
-model,best_params,cv_bal_acc (train),val_accuracy,val_bal_accuracy,val_sensitivity,val_specificity,val_auc,fit_time_s,experiment,groups,n_features
-LogReg,{'logisticregression__C': 0.01},0.7572,0.748,0.7476,0.723,0.7721,0.8132,13.1,hist_hsv_hellinger,hist_hsv,96
-kNN,"{'kneighborsclassifier__n_neighbors': 41, 'kneighborsclassifier__weights': 'uniform'}",0.7694,0.761,0.7613,0.778,0.7446,0.8391,1.4,hist_hsv_hellinger,hist_hsv,96
