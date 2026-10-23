@@ -1,6 +1,5 @@
 {
   "task": "multiclass",
-  "created": "2026-10-21T18:35:44",
   "best_model": "HistGradientBoosting",
   "files": {
     "LogReg (baseline)": "logreg__baseline.joblib",
@@ -438,7 +437,6 @@
     "gtex_gabor_l24_aniso",
     "gtex_gabor_ratio_fine_coarse"
   ],
-  "train_csv": "C:\\Users\\Lenovo\\PycharmProjects\\Melanoma-Challenge-ML-UdG\\features_multiclass_final\\features_train.csv",
   "val_metrics": [
     {
       "modelo": "HistGradientBoosting",
@@ -502,18 +500,8 @@
     },
     {
       "modelo": "LogReg (baseline)",
-      "kappa": 0.6141758679209705,
-      "bal_acc": 0.7087343915295904,
-      "f1_macro": 0.6642265512699035,
-      "auc_ovr": 0.8947207583022379,
-      "ap_macro": 0.7135544983428418,
       "recall_bcc": 0.7349397590361446,
-      "recall_mel": 0.827433628318584,
       "recall_scc": 0.5638297872340425,
-      "ap_bcc": 0.8800257789599897,
-      "ap_mel": 0.9563417579153637,
-      "ap_scc": 0.30429595815317173,
-      "kappa IC95%": "[0.578, 0.649]"
     },
     {
       "modelo": "KNN",
@@ -562,7 +550,7 @@
     }
   ],
   "versions": {
-    "python": "3.11.16",
+    "python": "3.11.17",
     "sklearn": "1.9.1",
     "xgboost": "3.4.2",
     "numpy": "2.4.6",
