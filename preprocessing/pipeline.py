@@ -102,12 +102,14 @@ def update_manifest(rows, manifest_path):
 
 
 def summarize_manifest(df):
-    """Prints statuses, a summary per split/class, fallbacks and errors."""
+    """Prints statuses, a summary per split/class, fallbacks and errors (only with the columns that exist)."""
     print(df["status"].str.split(":").str[0].value_counts().to_string(), "\n")
-    print(df.groupby(["split", "class"]).agg(n=("name", "size"),
-                                             seg_ok=("seg_ok", "mean"),
-                                             area_frac_med=("mask_area_frac", "median"),
-                                             hair_frac_med=("hair_frac", "median")).round(3).to_string())
+    aggs = {"n": ("name", "size"),
+            "seg_ok": ("seg_ok", "mean"),
+            "area_frac_med": ("mask_area_frac", "median"),
+            "hair_frac_med": ("hair_frac", "median")}
+    aggs = {k: v for k, v in aggs.items() if v[0] in df}
+    print(df.groupby(["split", "class"]).agg(**aggs).round(3).to_string())
     if "crop_fallback" in df:
         print("\nNot cropped (fallback):", int(df["crop_fallback"].fillna(False).astype(bool).sum()))
     errs = df[df["status"].str.startswith("error")]
