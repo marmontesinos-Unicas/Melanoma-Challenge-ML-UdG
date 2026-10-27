@@ -1,6 +1,6 @@
 {
   "task": "multiclass",
-  "created": "2026-10-21T18:45:23",
+  "created": "2026-10-22T10:32:34",
   "best_model": "XGBoost",
   "files": {
     "LogReg (baseline)": "logreg__baseline.joblib",
