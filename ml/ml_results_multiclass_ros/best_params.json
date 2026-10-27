@@ -1,0 +1,31 @@
+{
+  "LogReg (baseline)": {
+    "C": 0.01
+  },
+  "KNN": {
+    "n_neighbors": 5,
+    "weights": "distance"
+  },
+  "SVM-RBF": {
+    "C": 10.0
+  },
+  "Decision Tree": {
+    "max_depth": 12,
+    "min_samples_leaf": 5
+  },
+  "Random Forest": {
+    "max_depth": null,
+    "min_samples_leaf": 1,
+    "max_features": 0.1
+  },
+  "HistGradientBoosting": {
+    "max_depth": 8,
+    "learning_rate": 0.05,
+    "max_iter": 500
+  },
+  "XGBoost": {
+    "max_depth": 5,
+    "learning_rate": 0.05,
+    "n_estimators": 600
+  }
+}
