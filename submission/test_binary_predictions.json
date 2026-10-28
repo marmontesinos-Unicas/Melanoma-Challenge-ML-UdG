@@ -1,0 +1,16 @@
+{
+  "model": "Ens XGB+SVM",
+  "model_file": "ens_xgb_svm.joblib",
+  "results_dir": "C:\\Users\\jcgon\\PycharmProjects\\Melanoma-Challenge-ML-UdG\\ml\\ml_results_binary_gridsearch",
+  "trained_on": "train",
+  "decision": {
+    "threshold": 0.5,
+    "source": "decision_threshold.json",
+    "default": 0.5
+  },
+  "codes": {
+    "0": "nevus",
+    "1": "lesión"
+  },
+  "n_images": 6340
+}

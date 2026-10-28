@@ -1,6 +1,6 @@
 {
   "task": "multiclass",
-  "created": "2026-10-23T11:45:57",
+  "created": "2026-10-27T14:44:46",
   "best_model": "Ens HGB+SVM (SVM x2)",
   "files": {
     "LogReg (baseline)": "logreg__baseline.joblib",

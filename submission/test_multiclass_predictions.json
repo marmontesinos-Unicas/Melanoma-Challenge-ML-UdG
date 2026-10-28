@@ -1,0 +1,20 @@
+{
+  "model": "Ens HGB+SVM",
+  "model_file": "ens_hgb_svm.joblib",
+  "results_dir": "C:\\Users\\jcgon\\PycharmProjects\\Melanoma-Challenge-ML-UdG\\ml\\ml_results_multiclass_smote",
+  "trained_on": "train",
+  "decision": {
+    "weights": {
+      "bcc": 1.0,
+      "mel": 1.0,
+      "scc": 1.0
+    },
+    "source": "ninguno (no hay factores guardados para este modelo): argmax"
+  },
+  "codes": {
+    "0": "mel",
+    "1": "bcc",
+    "2": "scc"
+  },
+  "n_images": 2121
+}

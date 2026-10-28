@@ -1,0 +1,13 @@
+{
+  "model": "Ens HGB+SVM+LogReg",
+  "classes": [
+    "bcc",
+    "mel",
+    "scc"
+  ],
+  "weights": [
+    0.7,
+    1.0,
+    0.7
+  ]
+}

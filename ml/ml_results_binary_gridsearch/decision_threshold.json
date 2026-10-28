@@ -1,0 +1,5 @@
+{
+  "model": "Ens XGB+SVM",
+  "threshold": 0.5,
+  "default": 0.5
+}
